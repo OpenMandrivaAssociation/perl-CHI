@@ -3,7 +3,7 @@
 
 Name:       perl-%{upstream_name}
 Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 2
+Release:    %mkrel 3
 
 Summary:    Nothing is cached
 License:    GPL+ or Artistic
@@ -23,6 +23,7 @@ BuildRequires: perl(JSON)
 BuildRequires: perl(List::MoreUtils)
 BuildRequires: perl(Log::Any)
 BuildRequires: perl(Log::Any::Adapter)
+BuildRequires: perl-Log-Any-Adapter
 BuildRequires: perl(Log::Any::Adapter::Dispatch)
 BuildRequires: perl(Module::Load::Conditional)
 BuildRequires: perl(Moose)
