@@ -1,45 +1,46 @@
 %define upstream_name    CHI
-%define upstream_version 0.36
+%define upstream_version 0.55
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 4
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	1
 
-Summary:    Nothing is cached
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module//%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	Nothing is cached
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module//%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl(Carp::Assert)
-BuildRequires: perl(Data::UUID)
-BuildRequires: perl(Date::Parse)
-BuildRequires: perl(Digest::JHash)
-BuildRequires: perl(Digest::MD5)
-BuildRequires: perl(ExtUtils::MakeMaker)
-BuildRequires: perl(File::Spec)
-BuildRequires: perl(Hash::MoreUtils)
-BuildRequires: perl(JSON)
-BuildRequires: perl(List::MoreUtils)
-BuildRequires: perl(Log::Any)
-BuildRequires: perl(Log::Any::Adapter)
-BuildRequires: perl-Log-Any-Adapter
-BuildRequires: perl(Log::Any::Adapter::Dispatch)
-BuildRequires: perl(Module::Load::Conditional)
-BuildRequires: perl(Moose)
-BuildRequires: perl(Storable)
-BuildRequires: perl(Task::Weaken)
-BuildRequires: perl(Test::Builder)
-BuildRequires: perl(Test::Class)
-BuildRequires: perl(Test::Deep)
-BuildRequires: perl(Test::Exception)
-BuildRequires: perl(Test::Log::Dispatch)
-BuildRequires: perl(Test::More)
-BuildRequires: perl(Test::Warn)
-BuildRequires: perl(Time::Duration)
-BuildRequires: perl(Time::Duration::Parse)
-BuildArch: noarch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:	perl-devel
+BuildRequires:	perl(Carp::Assert)
+BuildRequires:	perl(Data::UUID)
+BuildRequires:	perl(Date::Parse)
+BuildRequires:	perl(Digest::JHash)
+BuildRequires:	perl(Digest::MD5)
+BuildRequires:	perl(ExtUtils::MakeMaker)
+BuildRequires:	perl(File::Spec)
+BuildRequires:	perl(Hash::MoreUtils)
+BuildRequires:	perl(JSON)
+BuildRequires:	perl(List::MoreUtils)
+BuildRequires:	perl(Log::Any)
+BuildRequires:	perl(Log::Any::Adapter)
+BuildRequires:	perl-Log-Any-Adapter
+BuildRequires:	perl(Log::Any::Adapter::Dispatch)
+BuildRequires:	perl(Module::Load::Conditional)
+BuildRequires:	perl(Moose)
+BuildRequires:	perl(String::RewritePrefix)
+BuildRequires:	perl(Storable)
+BuildRequires:	perl(Task::Weaken)
+BuildRequires:	perl(Test::Builder)
+BuildRequires:	perl(Test::Class)
+BuildRequires:	perl(Test::Deep)
+BuildRequires:	perl(Test::Exception)
+BuildRequires:	perl(Test::Log::Dispatch)
+BuildRequires:	perl(Test::More)
+BuildRequires:	perl(Test::Warn)
+BuildRequires:	perl(Time::Duration)
+BuildRequires:	perl(Time::Duration::Parse)
+BuildArch:	noarch
 
 %description
 CHI provides a unified caching API, designed to assist a developer in
@@ -58,24 +59,29 @@ limitations in the Cache::Cache implementation.
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
-
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
 %make test
 
 %install
-rm -rf %buildroot
 %makeinstall_std
 
-%clean
-rm -rf %buildroot
-
 %files
-%defattr(-,root,root)
 %doc Changes LICENSE META.yml README
 %{_mandir}/man3/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
 
+
+%changelog
+* Sun Apr 17 2011 Funda Wang <fwang@mandriva.org> 0.360.0-4mdv2011.0
++ Revision: 654239
+- rebuild for updated spec-helper
+
+* Sat Dec 25 2010 Shlomi Fish <shlomif@mandriva.org> 0.360.0-3mdv2011.0
++ Revision: 625064
+- Trying to fix the deps
+- Add a missing build requires
+- import perl-CHI
 
